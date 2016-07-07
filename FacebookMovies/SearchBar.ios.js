@@ -15,7 +15,7 @@ export default class SearchBar extends Component {
         <TextInput
           autoCapitalize="none"
           autoCorrect={false}
-          onChange={this.props.onSearchChange}
+          onChangeText={this.props.onSearchChange}
           placeholder="Search a movie..."
           onFocus={this.props.onFocus}
           style={styles.searchBarInput}

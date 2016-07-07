@@ -32,6 +32,8 @@ export default class SearchScreen extends Component {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
       }),
+      filter: '',
+      queryNumber: 0,
     };
   }
 
@@ -40,9 +42,21 @@ export default class SearchScreen extends Component {
   }
 
   _urlForQueryAndPage(query: string, pageNumber: number) : string {
+    if (query) {
+      return (
+        API_URL + 'movies.json?apikey=' + apiKey + '&q=' +
+        encodeURIComponent(query) + '&page_limit=20&page=' + pageNumber
+      );
+    }
     return (
       API_URL + 'lists/movies/in_theaters.json?apikey=' + API_KEYS[0] + '&page_limit=20&page=' + pageNumber
     );
+  }
+
+  onSearchChange(event: Object) {
+      var filter = event.nativeEvent.text.toLowerCase();
+      console.log(filter);
+      this.searchMovies(filter);
   }
 
   searchMovies(query: string) {
@@ -50,7 +64,7 @@ export default class SearchScreen extends Component {
       isLoading: true,
       isLoadingTail: false,
     });
-    fetch(this._urlForQueryAndPage('', 1))
+    fetch(this._urlForQueryAndPage(query, 1))
       .then((response) => response.json())
       .catch((error) => {
         this.setState({
@@ -75,10 +89,6 @@ export default class SearchScreen extends Component {
         params: {movie},
       });
     }
-  }
-
-  onSearchChange(event: Object) {
-
   }
 
   hasMore() {
@@ -136,7 +146,10 @@ export default class SearchScreen extends Component {
       />;
       return (
         <View style={styles.container}>
-          <SearchBar />
+          <SearchBar
+            onSearchChange={this.onSearchChange.bind(this)}
+            isLoading={this.state.isLoading}
+          />
           <View style={styles.separator} />
           {content}
         </View>
