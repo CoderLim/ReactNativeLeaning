@@ -1,7 +1,7 @@
 # ReactNativeLeaning
-记录学习RN的过程
+> 记录学习RN的过程
 
-从学习到实战
+> 从学习到实战
 
 * 1.AwesomeProject 第一个RN项目
 * 2.使用控件
