@@ -44,6 +44,23 @@ export default class MovieScreen extends Component {
         </Text>
         <View style={styles.separator} />
         <Cast actors={this.props.movie.abridged_cast} />
+        <View>
+          <Text>
+            hello world! Im the bottom of scrollView
+          </Text>
+          <Text>
+            hello world! Im the bottom of scrollView
+          </Text>
+          <Text>
+            hello world! Im the bottom of scrollView
+          </Text>
+          <Text>
+            hello world! Im the bottom of scrollView
+          </Text>
+          <Text>
+            hello world! Im the bottom of scrollView
+          </Text>
+        </View>
       </ScrollView>
     );
   };
@@ -95,15 +112,12 @@ class Cast extends Component {
 const styles = StyleSheet.create({
   contentContainer: {
     padding: 10,
-    backgroundColor: 'white',
-    flex: 1,
   },
   rightPane: {
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     flex: 1,
   },
   movieTitle: {
-    // flex: 1,
     fontSize: 16,
     fontWeight: '500',
   },

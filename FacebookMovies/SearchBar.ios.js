@@ -32,7 +32,7 @@ export default class SearchBar extends Component {
 const styles = StyleSheet.create({
   searchBar: {
     backgroundColor: 'white',
-    marginTop: 64,
+    marginTop: 20,
     padding: 3,
     paddingLeft: 8,
     flexDirection: 'row',

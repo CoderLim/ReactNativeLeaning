@@ -23,9 +23,9 @@ const API_KEYS = [
 ];
 
 export default class SearchScreen extends Component {
+
   constructor(props) {
     super(props);
-
     this.state = {
       isLoading: false,
       isLoadingTail: false,
@@ -41,10 +41,14 @@ export default class SearchScreen extends Component {
     this.searchMovies('');
   }
 
+  componentWillMount() {
+    this.timer && clearTimeout(this.timer);
+  }
+
   _urlForQueryAndPage(query: string, pageNumber: number) : string {
     if (query) {
       return (
-        API_URL + 'movies.json?apikey=' + apiKey + '&q=' +
+        API_URL + 'movies.json?apikey=' + API_KEYS[0] + '&q=' +
         encodeURIComponent(query) + '&page_limit=20&page=' + pageNumber
       );
     }
@@ -53,10 +57,14 @@ export default class SearchScreen extends Component {
     );
   }
 
-  onSearchChange(event: Object) {
-      var filter = event.nativeEvent.text.toLowerCase();
+  // 这里参数是text而不是event！
+  onSearchChange(text: string) {
+      this.timer && clearTimeout(this.timer);
+      var filter = text.toLowerCase();
       console.log(filter);
-      this.searchMovies(filter);
+      this.timer = setTimeout(() => {
+        this.searchMovies(filter);
+      }, 100);
   }
 
   searchMovies(query: string) {
@@ -96,7 +104,8 @@ export default class SearchScreen extends Component {
   }
 
   onEndReached() {
-    console.log('reached the end');
+    // Alert.alert('tip', 'reach the end');
+    console.log('reach the end!');
   }
 
   getDataSource(movies: Array<any>): ListView.DataSource {
@@ -119,7 +128,13 @@ export default class SearchScreen extends Component {
   }
 
   renderFooter() {
-
+    console.log('renderFooter:'+ this.state.isLoadingTail);
+    if (!this.state.isLoadingTail) {
+      return (<View style={[styles.scrollSpinner, {flex:1, alignItems: 'center'}]}>
+                <Text>-----The End-----</Text>
+              </View>);
+    }
+    return <ActivityIndicator style={styles.scrollSpinner} />
   }
 
   renderSeparator(sectionID: number|string,
@@ -136,7 +151,7 @@ export default class SearchScreen extends Component {
         ref="listview"
         renderSeparator={this.renderSeparator.bind(this)}
         dataSource={this.state.dataSource}
-        renderFoooter={this.renderFooter.bind(this)}
+        renderFooter={this.renderFooter.bind(this)}
         renderRow={this.renderRow.bind(this)}// 刚开始没bind，所以点击cell时一直提示Cannot read property ‘selectMovie’
         onEndReached={this.onEndReached.bind(this)}
         automaticallyAdjustContentInsets={false}
@@ -149,6 +164,9 @@ export default class SearchScreen extends Component {
           <SearchBar
             onSearchChange={this.onSearchChange.bind(this)}
             isLoading={this.state.isLoading}
+            onFocus={() =>
+              this.refs.listview && this.refs.listview.getScrollResponder().scrollTo({x: 0, y: 0})
+            }
           />
           <View style={styles.separator} />
           {content}
