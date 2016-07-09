@@ -1,5 +1,5 @@
 # ReactNativeLeaning
-> 记录学习RN的过程
+> 记录学习RN的过程,主要是一些典型的编码，其他简单的就没添加了，更多内容请参考：http://reactnative.cn/
 
 > 从学习到实战
 
