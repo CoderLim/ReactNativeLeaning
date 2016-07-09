@@ -10,5 +10,7 @@
   * 2.3 TouchableHighlightTest
   * 2.4 NavigatorTest
   * 2.5 TabBarIOSTest
-* 3.实例
-  * 3.1FacebookMovies ：根据官方的Movies的ES5版本用ES6实现
+* 3.API
+  * 3.1 Animated:介绍了timing，spring，decay，sequence，parallel
+* 4.实例
+  * 4.1FacebookMovies ：根据官方的Movies的ES5版本用ES6实现
