@@ -7,7 +7,12 @@ import {
   Easing,
 } from 'react-native';
 
-export class Demo1 extends Component {
+//
+// 这个default不能丢！不然就会提示“Element type is invalid: ....Check the render method of 'Navigator' ”
+//
+// export default 与 export的区别：http://www.csdn.net/article/2015-04-30/2824595-Modules-in-ES6
+//
+export default class Demo1 extends Component {
   constructor(props) {
     super(props);
 
@@ -30,6 +35,7 @@ export class Demo1 extends Component {
     return (
       <Animated.View style={[styles.container, {opacity: this.state.fadeAnimation}]}>
         <Text>Hello, I did fadeIn!</Text>
+        <Text>左划可以返回</Text>
       </Animated.View>
     );
   }

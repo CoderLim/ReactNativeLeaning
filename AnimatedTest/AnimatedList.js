@@ -18,11 +18,15 @@ import {
   ListView,
   Alert,
   TouchableHighlight,
+  Navigator,
   Text,
   View
 } from 'react-native';
 
 import Demo1 from './Demo1';
+import Demo2 from './Demo2';
+import Demo3 from './Demo3';
+import Demo4 from './Demo4';
 
 export default class AnimatedList extends Component {
   constructor(props) {
@@ -31,8 +35,10 @@ export default class AnimatedList extends Component {
     this.state = {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
-      }).cloneWithRows(['primary', '复杂点', '再复杂点']),
+      }).cloneWithRows(['primary', 'parallel', 'sequence', 'spring', 'decay']),
     };
+    this.state.names = ['Demo1', 'Demo2', 'Demo3', 'Demo4', 'Demo5'];
+    this.state.components = [Demo1, Demo2, Demo3, Demo4];
   }
 
   renderRow(rowData, sectionID, rowID) {
@@ -52,20 +58,24 @@ export default class AnimatedList extends Component {
   }
 
   onSelectItem(rowData: string, sectionID: number|string, rowID: number|string) {
-    if (rowID == 0) {
-      let { navigator } = this.props;
-      navigator.push({
-        name: 'demo1',
-        component: Demo1,
-      });
+    if (rowID == 4) {
+      Alert.alert('提示', '这个比较简单，自己网上搜搜看吧');
+      return;
     }
+    const { navigator } = this.props;
+    let name = 'demo1';
+    let component = Demo1;
+    navigator.push({
+      name: this.state.names[parseInt(rowID)],
+      component: this.state.components[parseInt(rowID)],
+    });
   }
 
   render() {
     return (
       <View style={styles.container}>
         <View>
-          <Text style={styles.title}>跟我一起动起来</Text>
+          <Text style={styles.title}>{"Let's move!"}</Text>
         </View>
         <ListView ref='listview'
           style={styles.listView}
