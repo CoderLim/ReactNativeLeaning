@@ -1,5 +1,5 @@
 # ReactNativeLeaning
-> 记录学习RN的过程
+> 记录学习RN的过程,主要是一些典型的编码，其他简单的就没添加了，更多内容请参考：http://reactnative.cn/
 
 > 从学习到实战
 
@@ -10,5 +10,7 @@
   * 2.3 TouchableHighlightTest
   * 2.4 NavigatorTest
   * 2.5 TabBarIOSTest
-* 3.实例
-  * 3.1FacebookMovies ：根据官方的Movies的ES5版本用ES6实现
+* 3.API
+  * 3.1 Animated:介绍了timing，spring，decay，sequence，parallel
+* 4.实例
+  * 4.1FacebookMovies ：根据官方的Movies的ES5版本用ES6实现
