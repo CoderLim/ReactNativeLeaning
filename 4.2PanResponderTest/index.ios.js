@@ -18,49 +18,57 @@ class PanGestureTest extends Component {
   constructor(props) {
     super(props);
     this._panResponder = {};
+    this.state = {
+      panStateText: 'nothing',
+    };
   }
 
   componentWillMount() {
     console.log('componentWillMount');
     this._panResponder = PanResponder.create({
-      onStartShouldSetPanResponder: this._handleStartShouldSetPanResponder.bind(this),
-      onMoveShouldSetPanResponder: this._handleMoveShouldSetPanResponder.bind(this),
+      // 要求成为响应者
+      onStartShouldSetPanResponder: () => true,
+      onStartShouldSetPanResponderCapture: () => true,
+      onMoveShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponderCapture: () => true,
+
+      // 开始手势操作
       onPanResponderGrant: this._handlePanResponderGrant.bind(this),
       onPanResponderMove: this._handlePanResponderMove.bind(this),
+      // 用户放开了所有触摸点
       onPanResponderRelease: this._handlePanResponderEnd.bind(this),
+      // 另一个组件成为了新的响应者，所以当前手势将被取消
       onPanResponderTerminate: this._handlePanResponderTerminate.bind(this),
     });
     console.log(this._panResponder);
-  }
-
-  _handleStartShouldSetPanResponder() {
-    console.log('startShouldSetPanResponder');
-    return true;
-  }
-  _handleMoveShouldSetPanResponder() {
-    console.log('moveShouldSetPanResponder');
-    return true;
-  }
+  }s
   _handlePanResponderGrant() {
-    console.log('grant');
+    this.setState({
+      panStateText: 'grant',
+    });
   }
   _handlePanResponderMove() {
-    console.log('move');
+    this.setState({
+      panStateText: 'move',
+    });
   }
   _handlePanResponderEnd() {
-    console.log('end');
+    this.setState({
+      panStateText: 'end',
+    });
   }
   _handlePanResponderTerminate() {
-    console.log('terminate');
+    this.setState({
+      panStateText: 'terminate',
+    });
   }
 
   render() {
     return (
-      <View style={styles.container}
-        {...this._panResponder.panHandler}
-      >
+      // 注意这里的panHandler是负数，写成单数是不会报错的哦！卖个萌
+      <View style={styles.container} {...this._panResponder.panHandlers}>
         <Text style={styles.welcome}>
-          Welcome to React Native!1342
+          {this.state.panStateText}
         </Text>
         <Text style={styles.instructions}>
           To get started, edit index.ios.js
