@@ -24,6 +24,7 @@ export default class FirstPageComponent extends Component {
       navigator.push({
         name: 'SecondPageComponent',
         component: SecondPageComponent,
+        title: 'page2',
         params: {
           name: 'glm',
           getFeedBack: function(text) {
