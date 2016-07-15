@@ -24,7 +24,7 @@ import {
 import FirstPageComponent from './FirstPageComponent';
 
 var NavigationBarRouteMapper = {
-  LeftButton: function(route, navigator, index, navState) {
+  LeftButton(route, navigator, index, navState) {
     if (index === 0) {
       return null;
     }
@@ -38,15 +38,15 @@ var NavigationBarRouteMapper = {
         </Text>
       </TouchableHighlight>
     );
-  },
+  }
 
-  Title: function(route, navigator, index, navState) {
+  Title(route, navigator, index, navState) {
     return (
       <Text style={styles.navText}>{route.name} [{index}]</Text>
     );
-  },
+  }
 
-  RightButton: function(route, navigator, index, navState) {
+  RightButton(route, navigator, index, navState) {
     return (
       <Text>right</Text>
     );
