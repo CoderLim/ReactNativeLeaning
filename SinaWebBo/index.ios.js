@@ -8,29 +8,53 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
+  AsyncStorage,
+  Image,
+  TabBarIOS,
   Text,
   View
 } from 'react-native';
 
+import Const from './Const';
+import AuthPage from './AuthPage';
+import TabBarPage from './TabBarPage';
+
 class SinaWebBo extends Component {
   constructor(props) {
     super(props);
-    console.log(React.Component);
+
+    this.state = {
+      pageIndex: 1,
+    };
+
+    // 检查是否已经有token
+    AsyncStorage.getItem(Const.ACCESSTOKEN_KEY)
+     .then((value) => {
+         this.setState({
+           pageIndex: !value ? 0 : 1,
+         });
+     })
+     .catch((error) => {
+     })
+     .done();
+
   }
   render() {
+    if (this.state.pageIndex === 0) {
+      return (
+        // 授权页面
+        <AuthPage
+          authSuccessCallback={() => {
+            this.setState({
+              pageIndex: 1,
+            });
+          }}
+        />
+      );
+    }
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+      // <Image source={ require('./images/TabBar/didian.png')} />
+      <TabBarPage />
     );
   }
 }
