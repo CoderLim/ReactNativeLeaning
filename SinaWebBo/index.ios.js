@@ -15,7 +15,7 @@ import {
   View
 } from 'react-native';
 
-import Const from './Const';
+import Const from './Other/Const';
 import AuthPage from './AuthPage';
 import TabBarPage from './TabBarPage';
 

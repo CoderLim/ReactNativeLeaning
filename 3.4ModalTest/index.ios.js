@@ -18,8 +18,8 @@ class ModalTest extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      animationType: 'slide',// none, slide, fade
-      modalVisible: false,
+      animationType: 'none',// none, slide, fade
+      modalVisible: true,
     };
   }
 
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.7)',
+    backgroundColor: 'rgba(0,0,0,1)',
   },
   welcome: {
     fontSize: 20,

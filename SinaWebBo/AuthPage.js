@@ -7,7 +7,7 @@ import {
   AsyncStorage,
 } from 'react-native';
 
-import Const from './Const';
+import Const from './Other/Const';
 
 export default class AuthPage  extends Component {
   constructor(props) {
