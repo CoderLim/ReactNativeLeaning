@@ -53,6 +53,7 @@ export default class StatusCell extends Component {
             </Text>
           </View>
 
+          {/* begin: Three buttons at bottom */}
           <View style={[styles.bottomView, styles.row]}>
             <TouchableHighlight style={styles.button}>
               <View style={[styles.row, styles.flexCenter]}>
@@ -75,6 +76,7 @@ export default class StatusCell extends Component {
               </View>
             </TouchableHighlight>
           </View>
+          {/* end: Three buttons at bottom */}
         </View>
       </View>
     );
@@ -88,12 +90,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgb(226, 226, 226)',
   },
   wrapper: {
-    flex:0,
     marginTop: 5,
     marginHorizontal: 5,
     backgroundColor: 'rgb(252, 252, 252)',
   },
   baseInfo: {
+    height: 64,
     flexDirection: 'row',
     marginTop: 10,
     marginLeft: 10,
@@ -126,7 +128,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   content: {
-    flex: 1,
+    height: 100,
     margin: 10,
   },
   bottomView: {
