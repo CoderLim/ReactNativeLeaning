@@ -24,7 +24,7 @@ class SinaWebBo extends Component {
     super(props);
 
     this.state = {
-      pageIndex: 1,
+      pageIndex: 0,
     };
 
     // 检查是否已经有token
