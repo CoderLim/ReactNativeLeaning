@@ -83,9 +83,10 @@ export default class StatusCell extends Component {
   }
 }
 
+{/* 终于找到坑了， container不能设置flex:1，否则所有的cell都是登高的。
+    如果cell的内容多少不一致，就会导致cell显示不全*/}
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     backgroundColor: 'rgb(226, 226, 226)',
   },
@@ -128,7 +129,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   content: {
-    height: 100,
     margin: 10,
   },
   bottomView: {

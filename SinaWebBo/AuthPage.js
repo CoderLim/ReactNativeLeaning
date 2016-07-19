@@ -14,7 +14,7 @@ export default class AuthPage  extends Component {
     super(props);
   }
 
-  _onShouldStartLoadWithRequest(webView) {
+  onShouldStartLoadWithRequest(webView) {
     let url = webView.url;
     if (url.indexOf('code=') > 0) {
       let code = /code=([^&]+)/.exec(url)[1]
@@ -65,7 +65,7 @@ export default class AuthPage  extends Component {
         <WebView
           source={{uri: Const.LoginURL}}
           javaScriptEnabled={true}
-          onShouldStartLoadWithRequest={this._onShouldStartLoadWithRequest.bind(this)}
+          onShouldStartLoadWithRequest={this.onShouldStartLoadWithRequest.bind(this)}
         >
         </WebView>
       </View>
