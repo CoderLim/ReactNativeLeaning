@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import Const from '../Other/Const';
+import StatusCell from './StatusCell';
 
 export default class HomePage extends Component {
   constructor(props) {
@@ -50,6 +51,7 @@ export default class HomePage extends Component {
           })
           .done();
       })
+      .catch((error) => Alert.alert('error', error))
       .done();
   }
 
@@ -58,9 +60,7 @@ export default class HomePage extends Component {
              rowID: number|string,
              highlightRowFunc: (sectionID: ?number|string, rowID: ?number|string) => void) {
     return (
-      <Text key={status.id}>
-        {status.text}
-      </Text>
+      <StatusCell status={status}/>
     );
   }
 
@@ -85,6 +85,10 @@ export default class HomePage extends Component {
           dataSource={this.state.dataSource}
           renderRow={this._renderRow.bind(this)}
           renderSeparator={this._renderSeparator.bind(this)}
+          automaticallyAdjustContentInsets={true}
+          keyboardDismissMode="on-drag"
+          keyboardShouldPersistTaps={true}
+          showsVerticalScrollIndicator={false}
         />
       </View>
     );
@@ -96,11 +100,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   listView: {
+    marginTop: 66,
   },
   rowSeparator: {
     backgroundColor: 'rgba(0, 0, 0, 0.1)',
     height: 1,
-    marginLeft: 4,
   },
   rowSeparatorHide: {
     opacity: 0.0,
