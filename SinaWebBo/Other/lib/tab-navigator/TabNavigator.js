@@ -16,6 +16,9 @@ import Tab from './Tab';
 import TabBar from './TabBar';
 import TabNavigatorItem from './TabNavigatorItem';
 
+// insert by glm
+import CenterTab from './CenterTab';
+
 export default class TabNavigator extends React.Component {
   static propTypes = {
     ...View.propTypes,
@@ -110,8 +113,9 @@ export default class TabNavigator extends React.Component {
       badge = <Badge>{item.props.badgeText}</Badge>;
     }
 
+    let _Tab = item.props.title ? Tab : CenterTab;
     return (
-      <Tab
+      <_Tab
         testID={item.props.testID}
         title={item.props.title}
         allowFontScaling={item.props.allowFontScaling}
@@ -127,7 +131,7 @@ export default class TabNavigator extends React.Component {
         hidesTabTouch={this.props.hidesTabTouch}
         style={item.props.tabStyle}>
         {icon}
-      </Tab>
+      </_Tab>
     );
   }
 }
