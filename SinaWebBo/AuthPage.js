@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Alert,
   AsyncStorage,
+  Text,
 } from 'react-native';
 
 import Const from './Other/Const';
@@ -63,8 +64,11 @@ export default class AuthPage  extends Component {
     return (
       <View style={styles.container}>
         <WebView
+          style={styles.webView}
           source={{uri: Const.LoginURL}}
           javaScriptEnabled={true}
+          startInLoadingState={true}
+          renderLoading={() => <View style={styles.webViewLoading}><Text>正在加载...</Text></View>}
           onShouldStartLoadWithRequest={this.onShouldStartLoadWithRequest.bind(this)}
         >
         </WebView>
@@ -78,4 +82,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
+  webView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  webViewLoading: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 })

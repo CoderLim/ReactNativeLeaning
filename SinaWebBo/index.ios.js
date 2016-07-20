@@ -31,13 +31,11 @@ class SinaWebBo extends Component {
     AsyncStorage.getItem(Const.ACCESSTOKEN_KEY)
      .then((value) => {
          this.setState({
-           pageIndex: !value ? 0 : 1,
          });
      })
      .catch((error) => {
      })
      .done();
-
   }
   render() {
     if (this.state.pageIndex === 0) {
@@ -53,7 +51,6 @@ class SinaWebBo extends Component {
       );
     }
     return (
-      // <Image source={ require('./images/TabBar/didian.png')} />
       <TabBarPage />
     );
   }
