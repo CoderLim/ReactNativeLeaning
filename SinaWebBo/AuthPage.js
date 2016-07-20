@@ -10,14 +10,21 @@ import {
 
 import Const from './Other/Const';
 
-export default class AuthPage  extends Component {
+export default class AuthPage extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      didAuthorize: false,
+    };
   }
 
   onShouldStartLoadWithRequest(webView) {
     let url = webView.url;
     if (url.indexOf('code=') > 0) {
+      this.setState({
+        didAuthorize: true,
+      });
       let code = /code=([^&]+)/.exec(url)[1]
       this.getAccessToken(code);
       return false;
@@ -61,22 +68,25 @@ export default class AuthPage  extends Component {
   }
 
   render() {
+    let child = this.state.didAuthorize ?
+                <Text style={{alignSelf: 'center'}}>认证通过，正在请求token</Text> :
+                (<WebView
+                    style={styles.webView}
+                    source={{uri: Const.LoginURL}}
+                    javaScriptEnabled={true}
+                    startInLoadingState={true}
+                    onShouldStartLoadWithRequest={this.onShouldStartLoadWithRequest.bind(this)}
+                  >
+                  </WebView>);
     return (
       <View style={styles.container}>
-        <WebView
-          style={styles.webView}
-          source={{uri: Const.LoginURL}}
-          javaScriptEnabled={true}
-          startInLoadingState={true}
-          renderLoading={() => <View style={styles.webViewLoading}><Text>正在加载...</Text></View>}
-          onShouldStartLoadWithRequest={this.onShouldStartLoadWithRequest.bind(this)}
-        >
-        </WebView>
+        {child}
       </View>
     );
   }
 }
 
+{/* container不能设置alignItem：‘center’，否则webView看不到 */}
 const styles = StyleSheet.create({
   container: {
     flex: 1,

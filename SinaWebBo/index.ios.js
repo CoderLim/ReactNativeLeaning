@@ -30,8 +30,9 @@ class SinaWebBo extends Component {
     // 检查是否已经有token
     AsyncStorage.getItem(Const.ACCESSTOKEN_KEY)
      .then((value) => {
-         this.setState({
-         });
+       this.setState({
+         pageInde: 1,
+       });
      })
      .catch((error) => {
      })
