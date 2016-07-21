@@ -7,15 +7,22 @@ import {
   StyleSheet,
   ListView,
   AsyncStorage,
+  ActivityIndicator,
 } from 'react-native';
 
 import Const from '../Other/Const';
 import StatusCell from './StatusCell';
 
+var resultsCache = {
+    data: [],
+};
+
 export default class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isLoading: false,
+      isLoadingTail: false,
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
       }),
@@ -42,20 +49,28 @@ export default class HomePage extends Component {
           .catch((error) => Alert.alert('error', error))
           .then((responseData) => {
             console.log(responseData.statuses[0]);
+            {/* 按下面写不对，因为concat不会改变当前数组 */}
+            {/* resultsCache.data.concat(responseData.statuses); */}
+            resultsCache.data = resultsCache.data.concat(responseData.statuses);
+            console.log(resultsCache);
             // 切记是这样写
             this.setState({
-              dataSource: this.state.dataSource.cloneWithRows(responseData.statuses)
+              dataSource: this.state.dataSource.cloneWithRows(resultsCache.data)
             })
             // ，而不是,我说怎么没数据
             // this.state.dataSource.cloneWithRows(responseData.statuses);
           })
-          .done();
+          .done(() => {
+            this.setState({
+              isLoadingTail: false,
+            });
+          });
       })
       .catch((error) => Alert.alert('error', error))
       .done();
   }
 
-  _renderRow(status: Object,
+  renderRow(status: Object,
              sectionID: number|string,
              rowID: number|string,
              highlightRowFunc: (sectionID: ?number|string, rowID: ?number|string) => void) {
@@ -64,7 +79,14 @@ export default class HomePage extends Component {
     );
   }
 
-  _renderSeparator(sectionID: number|string,
+  renderFooter() {
+    if (!this.state.isLoadingTail) {
+      return <Text style={{alignSelf:'center'}}>----End----</Text>
+    }
+    return <ActivityIndicator style={styles.scrollSpinner} />
+  }
+
+  renderSeparator(sectionID: number|string,
                    rowID: number|string,
                    adjacentRowHighlighted: boolean) {
     let style = styles.rowSeparator;
@@ -76,6 +98,17 @@ export default class HomePage extends Component {
     );
   }
 
+  onEndReached() {
+    if (this.state.isLoadingTail) {
+      return;
+    }
+
+    this.setState({
+      isLoadingTail: true,
+    });
+    this.getStatuses();
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -83,8 +116,10 @@ export default class HomePage extends Component {
           ref="listview"
           style={styles.listView}
           dataSource={this.state.dataSource}
-          renderRow={this._renderRow.bind(this)}
-          renderSeparator={this._renderSeparator.bind(this)}
+          renderRow={this.renderRow.bind(this)}
+          renderFooter={this.renderFooter.bind(this)}
+          renderSeparator={this.renderSeparator.bind(this)}
+          onEndReached={this.onEndReached.bind(this)}
           automaticallyAdjustContentInsets={true}
           keyboardDismissMode="on-drag"
           keyboardShouldPersistTaps={true}
