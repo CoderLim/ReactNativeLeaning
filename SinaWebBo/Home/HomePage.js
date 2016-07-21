@@ -56,11 +56,11 @@ export default class HomePage extends Component {
             {/* 按下面写不对，因为concat不会改变当前数组 */}
             {/* resultsCache.data.concat(responseData.statuses); */}
             resultsCache.data = resultsCache.data.concat(responseData.statuses);
-            // 切记是这样写
+            // 切记是这样写， 而不是像下面注释
             this.setState({
               dataSource: this.state.dataSource.cloneWithRows(resultsCache.data)
             })
-            // ，而不是,我说怎么没数据
+            // ，而不是这样，我说怎么没数据呢
             // this.state.dataSource.cloneWithRows(responseData.statuses);
           })
           .done(() => {

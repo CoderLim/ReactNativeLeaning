@@ -73,6 +73,22 @@ export default class StatusCell extends Component {
             </Text>
           </View>
 
+          <Image source={require('../images/Home/timeline_retweet_background.png')}
+            capInsets={{top:0.5,left:0.5,bottom:0.5,right:0.5}}
+            style={{
+              width: 320,
+              height: 200,
+            }}
+            >
+            <View style={{
+              flex: 1,
+              }}>
+              <Text>转发微博内容</Text>
+              <Text>转发微博内容</Text>
+              <Text>转发微博内容</Text>
+            </View>
+          </Image>
+
           {/* begin: Three buttons at bottom */}
           <View style={[styles.bottomView, styles.row]}>
             <TouchableHighlight style={styles.button}>
