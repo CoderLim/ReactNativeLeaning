@@ -11,6 +11,7 @@ import {
 
 import TabNavigator from './Other/lib/tab-navigator';
 import HomePage from './Home/HomePage';
+import ReleaseModal from './Release/ReleaseModal';
 
 export default class TabBarPage extends Component {
   constructor(props) {
@@ -18,10 +19,25 @@ export default class TabBarPage extends Component {
 
     this.state = {
       selectedIndex: 0,
+      modalVisible: false,
     };
   }
 
   render() {
+    if (this.state.modalVisible) {
+      return (
+        <ReleaseModal
+          animationType='slide'
+          visible={true}
+          transparent={true}
+          onRequestClose={() => {
+            this.setState({
+              modalVisible: false,
+            });
+          }}
+        />
+      );
+    }
     return (
     <TabNavigator>
       <TabNavigator.Item
@@ -73,16 +89,24 @@ export default class TabBarPage extends Component {
         <View style={styles.container}><Text>message page</Text></View>
       </TabNavigator.Item>
       <TabNavigator.Item
-        renderIcon={() => <Image source={require('./images/TabBar/tabbar_compose_icon_add.png')}/> }
+        renderIcon={() => {
+          return (
+            <TouchableHighlight onPress={() => {
+              this.setState({
+                modalVisible: true,
+              });
+            }}>
+              <Image source={require('./images/TabBar/tabbar_compose_icon_add.png')}/>
+            </TouchableHighlight>
+          );
+        }}
         renderSelectedIcon={() => <Image source={require('./images/TabBar/tabbar_compose_icon_add_highlighted.png')} />}
-        selected={this.state.selectedIndex === 2}
         onPress={() => {
           this.setState({
-            selectedIndex: 2,
+
           });
         }}
         >
-        <View style={styles.container}><Text>release page</Text></View>
       </TabNavigator.Item>
       <TabNavigator.Item
         title="广场"
