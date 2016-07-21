@@ -35,10 +35,15 @@ export default class HomePage extends Component {
 
   // 获取微博
   getStatuses() {
+    {/* 有点坑爹啊，计算max_id时数组的两个length都写成了legth
+        都没报错，默默的得到max_id＝0 */}
     AsyncStorage.getItem(Const.ACCESSTOKEN_KEY)
       .then((token) => {
+        let  max_id = resultsCache.data.length > 0 ?
+                      resultsCache.data[resultsCache.data.length-1].id-1 :
+                      0;
         let params = '?since_id=0' +
-                     '&max_id=' + 0 +
+                     '&max_id=' + max_id +
                      '&count=' + 20 +
                      '&access_token=' + token;
         fetch('https://api.weibo.com/2/statuses/home_timeline.json'+params,
@@ -48,11 +53,9 @@ export default class HomePage extends Component {
           .then((response) => response.json())
           .catch((error) => Alert.alert('error', error))
           .then((responseData) => {
-            console.log(responseData.statuses[0]);
             {/* 按下面写不对，因为concat不会改变当前数组 */}
             {/* resultsCache.data.concat(responseData.statuses); */}
             resultsCache.data = resultsCache.data.concat(responseData.statuses);
-            console.log(resultsCache);
             // 切记是这样写
             this.setState({
               dataSource: this.state.dataSource.cloneWithRows(resultsCache.data)
@@ -102,7 +105,7 @@ export default class HomePage extends Component {
     if (this.state.isLoadingTail) {
       return;
     }
-
+    console.log('-------');
     this.setState({
       isLoadingTail: true,
     });
@@ -123,7 +126,7 @@ export default class HomePage extends Component {
           automaticallyAdjustContentInsets={true}
           keyboardDismissMode="on-drag"
           keyboardShouldPersistTaps={true}
-          showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={true}
         />
       </View>
     );

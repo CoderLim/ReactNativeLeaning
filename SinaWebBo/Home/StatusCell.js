@@ -20,15 +20,35 @@ export default class StatusCell extends Component {
       if (matches.length > 1) {
         return matches[1];
       }
-      return '未知';
+    }
+    return '未知';
+  }
+
+  /* 获取发微博时间 */
+  getCreatedTime(str) {
+    if (str) {
+      let [date, now] = [new Date(str), new Date()];
+      if (date.getYear() == now.getYear()
+          && date.getMonth() == now.getMonth()
+          && date.getDate() == now.getDate()) {
+            if (date.getHours() == now.getHours()) {
+              if (now.getMinutes() - date.getMinutes() < 2) {
+                return "刚刚";
+              } else {
+                return `${now.getMinutes() - date.getMinutes()}分钟前`;
+              }
+            } else {
+              return `${now.getHours()-date.getHours()}小时前`;
+            }
+      } else {
+        return `${date.getYear()}年${date.getMonth()}月${date.getDate()}日 ${date.getHours()}:${date.getMinutes()}`;
+      }
     }
   }
 
   render() {
     let user = this.props.status.user;
     let status = this.props.status;
-    console.log(status);
-    console.log(status.source.match(/>(.*)<\//));
     return (
       <View style={styles.container}>
         <View style={styles.wrapper}>
@@ -40,7 +60,7 @@ export default class StatusCell extends Component {
                 <Text style={styles.nickName}>{user.name}</Text>
               </View>
               <View style={[styles.row, {marginTop: 10,}]}>
-                <Text style={styles.relaseTime}>刚刚</Text>
+                <Text style={styles.relaseTime}>{this.getCreatedTime(status.created_at)}</Text>
                 <Text style={styles.source}>来自{this.getSource(status)}</Text>
               </View>
             </View>
