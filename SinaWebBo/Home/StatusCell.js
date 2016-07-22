@@ -7,6 +7,8 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
+import RetweetView from './RetweetView';
+
 export default class StatusCell extends Component {
   constructor(props) {
     super(props);
@@ -47,8 +49,13 @@ export default class StatusCell extends Component {
   }
 
   render() {
-    let user = this.props.status.user;
-    let status = this.props.status;
+    let { status } = this.props,
+        { user } = status,
+        retweetView;
+
+    if (status.retweeted_status) {
+      retweetView = <RetweetView status={status.retweeted_status} />
+    }
     return (
       <View style={styles.container}>
         <View style={styles.wrapper}>
@@ -73,21 +80,8 @@ export default class StatusCell extends Component {
             </Text>
           </View>
 
-          <Image source={require('../images/Home/timeline_retweet_background.png')}
-            capInsets={{top:0.5,left:0.5,bottom:0.5,right:0.5}}
-            style={{
-              width: 320,
-              height: 200,
-            }}
-            >
-            <View style={{
-              flex: 1,
-              }}>
-              <Text>转发微博内容</Text>
-              <Text>转发微博内容</Text>
-              <Text>转发微博内容</Text>
-            </View>
-          </Image>
+          {/* 转发微博 */}
+          {retweetView}
 
           {/* begin: Three buttons at bottom */}
           <View style={[styles.bottomView, styles.row]}>
@@ -134,8 +128,8 @@ const styles = StyleSheet.create({
   baseInfo: {
     height: 64,
     flexDirection: 'row',
-    marginTop: 10,
-    marginLeft: 10,
+    marginTop: 5,
+    marginLeft: 5,
   },
   portrait: {
     width: 40,
@@ -161,11 +155,12 @@ const styles = StyleSheet.create({
     color: 'orange',
   },
   source: {
-    color: 'purple',
+    color: 'rgb(137,137,137)',
     marginLeft: 10,
   },
   content: {
-    margin: 10,
+    marginHorizontal: 5,
+    marginBottom: 5,
   },
   bottomView: {
     marginTop: 10,
