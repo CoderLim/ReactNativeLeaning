@@ -1,6 +1,7 @@
 基础对于很多人来说学起来很乏味，先来看看后面demo的动图吧
 
-![image](https://github.com/CoderGLM/ReactNativeLeaning/blob/master/SinaWebBo/screenshots/11.gif)<br/>
+![image](https://github.com/CoderGLM/ReactNativeLeaning/blob/master/SinaWebBo/screenshots/11.gif)  
+![image](https://github.com/CoderGLM/ReactNativeLeaning/blob/master/SinaWebBo/screenshots/12.gif)
 
 # ReactNativeLeaning：ES6版本；
 ###其中Movies和SinaWebBo是实际项目，后者正在抽空进行中
