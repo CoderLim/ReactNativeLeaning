@@ -67,6 +67,10 @@ export default class AuthPage extends Component {
       .done();
   }
 
+  /*
+    绑定：this.onShouldStartLoadWithRequest.bind(this)
+    还不支持ES7的 ::this.onShouldStartLoadWithRequest 这种写法
+  */
   render() {
     let child = this.state.didAuthorize ?
                 <Text style={{alignSelf: 'center'}}>认证通过，正在请求token</Text> :
