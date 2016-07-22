@@ -1,7 +1,12 @@
-# ReactNativeLeaning
-> 记录学习RN的过程,主要是一些典型的编码，其他简单的就没添加了，更多内容请参考：http://reactnative.cn/
-
-> 从学习到实战
+# ReactNativeLeaning：ES6版本；
+>
+> 从学习到实战，过程该如何把握，来看看[我的文章](http://www.jianshu.com/p/1f01174f43fa)吧：
+>
+> 前面是基础知识，后面是两个实战项目，第一个是用Es6重写官方Movies，第二个是个人项目：新浪微博
+>
+> 都是抽时间写的，进度有点慢，有错误欢迎指正
+>
+> 目前状态：在学习中爬坑，在坑中学习
 
 ### 项目列表
 * 1.AwesomeProject 第一个RN项目
