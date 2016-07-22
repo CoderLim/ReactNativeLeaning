@@ -1,4 +1,5 @@
 基础对于很多人来说学起来很乏味，先来看看后面demo的动图吧
+
 ![image](https://github.com/CoderGLM/ReactNativeLeaning/blob/master/SinaWebBo/screenshots/11.gif)<br/>
 
 # ReactNativeLeaning：ES6版本；
