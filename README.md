@@ -1,6 +1,10 @@
-基础对于很多人来说学起来很乏味，先来看看后面demo的动图吧
+基础对于很多人来说学起来很乏味，先来看看后面demo的动图吧(如果没有图片或显示静态图或很卡请耐心等候)
 
-![image](https://github.com/CoderGLM/ReactNativeLeaning/blob/master/SinaWebBo/screenshots/11.gif)  
+SinaWebBo:
+
+![image](https://github.com/CoderGLM/ReactNativeLeaning/blob/master/SinaWebBo/screenshots/11.gif)  <br/><br/>
+Movies：
+
 ![image](https://github.com/CoderGLM/ReactNativeLeaning/blob/master/SinaWebBo/screenshots/12.gif)
 
 # ReactNativeLeaning：ES6版本；
