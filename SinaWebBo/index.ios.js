@@ -16,6 +16,7 @@ import {
 } from 'react-native';
 
 import Const from './Other/Const';
+import NewFeaturePage from './Main/NewFeaturePage';
 import AuthPage from './AuthPage';
 import TabBarPage from './TabBarPage';
 
@@ -46,6 +47,17 @@ class SinaWebBo extends Component {
           authSuccessCallback={() => {
             this.setState({
               pageIndex: 1,
+            });
+          }}
+        />
+      );
+    } else if (this.state.pageIndex === 1) {
+      return (
+        // 新特性页面（轮播图）
+        <NewFeaturePage
+          donePreview={() => {
+            this.setState({
+              pageIndex: 2,
             });
           }}
         />
