@@ -12,7 +12,7 @@ import {
   Image,
   TabBarIOS,
   Text,
-  View
+  View,
 } from 'react-native';
 
 import Const from './Other/Const';
@@ -45,9 +45,20 @@ class SinaWebBo extends Component {
         // 授权页面
         <AuthPage
           authSuccessCallback={() => {
-            this.setState({
-              pageIndex: 1,
-            });
+            AsyncStorage.getItem(Const.IS_FIRST_OPEN_KEY)
+              .then((value) => {
+                if (value && value === "1") {
+                  this.setState({
+                    pageIndex: 1,
+                  });
+                } else {
+                  this.setState({
+                    pageIndex: 2,
+                  });
+                }
+              }).
+              done();
+
           }}
         />
       );

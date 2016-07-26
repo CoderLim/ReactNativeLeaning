@@ -7,7 +7,9 @@ import {
   Dimensions,
   TouchableHighlight,
   Alert,
+  AsyncStorage,
 } from 'react-native';
+import Const from '../Other/Const';
 import ViewPager from 'react-native-viewpager';
 
 var deviceWidth = Dimensions.get('window').width;
@@ -22,7 +24,8 @@ export default class NewFeaturePage extends Component {
   constructor(props) {
     super(props);
 
-    console.log(this.props);
+    // 标记：已经进入过引导页
+    AsyncStorage.setItem(Const.IS_FIRST_OPEN_KEY, '0');
 
     this.state = {
       dataSource: new ViewPager.DataSource({
