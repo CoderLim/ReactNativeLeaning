@@ -45,6 +45,9 @@ Movies：
 * 2.cell重叠
   * cell为什么会重叠呢？去网上找找吧，没有这种提问，好吧，难不成我又犯了什么弱智的问题？
   * 果然是弱智的问题，cell的最外层view不能设置flex：1，因为如果设置成flex：1，那所有cell的高度都是一样的
+* 3.can not read property of 'xxx'
+  * 如果你反复检查代码没问题，那就看看是不是在忘了bind，比如<MyView onclick={this._clickMyView}/>是错误的，应该写成
+  * <MyView onclick={this._clickMyView.bind(this)}/>，希望以后支持ES7的这种绑定："::this._clickMyView"
 
 ### 截图
 > 困了累了，睡觉前先扔上来几张图
