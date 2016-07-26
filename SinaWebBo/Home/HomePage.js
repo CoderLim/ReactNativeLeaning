@@ -105,10 +105,9 @@ export default class HomePage extends Component {
   }
 
   _renderFooter() {
-    if (!this.state.isLoadingTail) {
-      return <Text style={{alignSelf:'center'}}>----End----</Text>
-    }
-    return <ActivityIndicator style={styles.scrollSpinner} />
+    if (this.state.isLoadingTail) {
+      return <ActivityIndicator style={styles.scrollSpinner} />
+    }  
   }
 
   _renderSeparator(sectionID: number|string,
@@ -124,10 +123,10 @@ export default class HomePage extends Component {
   }
 
   _onEndReached() {
-    if (this.state.isLoadingTail) {
+    if (this.state.isLoadingTail || this.state.isLoading) {
       return;
     }
-    console.log('-------');
+
     this.setState({
       isLoadingTail: true,
     });
