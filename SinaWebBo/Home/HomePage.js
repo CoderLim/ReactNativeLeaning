@@ -1,3 +1,11 @@
+
+/*
+ *
+ *  下拉刷新：因为ListView继承自ScrollView，而ScrollView有RefreshControl属性
+ *
+ *  没有比这个更巧合更简单的方式了
+ *
+ */
 import React, { Component } from 'react';
 import {
   Navigator,
@@ -8,6 +16,8 @@ import {
   ListView,
   AsyncStorage,
   ActivityIndicator,
+  RefreshControl,
+
 } from 'react-native';
 
 import Const from '../Other/Const';
@@ -20,6 +30,7 @@ var resultsCache = {
 export default class HomePage extends Component {
   constructor(props) {
     super(props);
+    this._panResponder = {};
     this.state = {
       isLoading: false,
       isLoadingTail: false,
@@ -30,13 +41,18 @@ export default class HomePage extends Component {
   }
 
   componentDidMount() {
+    this.setState({
+      isLoading: true,
+    });
     this.getStatuses();
   }
 
   // 获取微博
   getStatuses() {
-    {/* 有点坑爹啊，计算max_id时数组的两个length都写成了legth
-        都没报错，默默的得到max_id＝0 */}
+    {
+      /* 有点坑爹啊，计算max_id时数组的两个length都写成了legth
+        都没报错，默默的得到max_id＝0 */
+    }
     AsyncStorage.getItem(Const.ACCESSTOKEN_KEY)
       .then((token) => {
         let  max_id = resultsCache.data.length > 0 ?
@@ -65,6 +81,7 @@ export default class HomePage extends Component {
           })
           .done(() => {
             this.setState({
+              isLoading: false,
               isLoadingTail: false,
             });
           });
@@ -73,7 +90,12 @@ export default class HomePage extends Component {
       .done();
   }
 
-  renderRow(status: Object,
+  /*
+   *
+   *  ListView事件
+   *
+   */
+  _renderRow(status: Object,
              sectionID: number|string,
              rowID: number|string,
              highlightRowFunc: (sectionID: ?number|string, rowID: ?number|string) => void) {
@@ -82,14 +104,14 @@ export default class HomePage extends Component {
     );
   }
 
-  renderFooter() {
+  _renderFooter() {
     if (!this.state.isLoadingTail) {
       return <Text style={{alignSelf:'center'}}>----End----</Text>
     }
     return <ActivityIndicator style={styles.scrollSpinner} />
   }
 
-  renderSeparator(sectionID: number|string,
+  _renderSeparator(sectionID: number|string,
                    rowID: number|string,
                    adjacentRowHighlighted: boolean) {
     let style = styles.rowSeparator;
@@ -101,13 +123,21 @@ export default class HomePage extends Component {
     );
   }
 
-  onEndReached() {
+  _onEndReached() {
     if (this.state.isLoadingTail) {
       return;
     }
     console.log('-------');
     this.setState({
       isLoadingTail: true,
+    });
+    this.getStatuses();
+  }
+
+  _onRefresh(...args) {
+    resultsCache.data.length = 0;
+    this.setState({
+      isLoading: true,
     });
     this.getStatuses();
   }
@@ -119,14 +149,26 @@ export default class HomePage extends Component {
           ref="listview"
           style={styles.listView}
           dataSource={this.state.dataSource}
-          renderRow={this.renderRow.bind(this)}
-          renderFooter={this.renderFooter.bind(this)}
-          renderSeparator={this.renderSeparator.bind(this)}
-          onEndReached={this.onEndReached.bind(this)}
+          renderRow={this._renderRow.bind(this)}
+          renderFooter={this._renderFooter.bind(this)}
+          renderSeparator={this._renderSeparator.bind(this)}
+          onEndReached={this._onEndReached.bind(this)}
           automaticallyAdjustContentInsets={true}
           keyboardDismissMode="on-drag"
           keyboardShouldPersistTaps={true}
           showsVerticalScrollIndicator={true}
+
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.isLoading}
+              onRefresh={this._onRefresh.bind(this)}
+              tintColor="#ff0000"
+              title="Loading..."
+              titleColor="#00ff00"
+              colors={['#ff0000', '#00ff00', '#0000ff']}
+              progressBackgroundColor="#ffff00"
+            />
+          }
         />
       </View>
     );
@@ -146,5 +188,8 @@ const styles = StyleSheet.create({
   },
   rowSeparatorHide: {
     opacity: 0.0,
+  },
+  scrollSpinner: {
+    height: 64,
   }
 });

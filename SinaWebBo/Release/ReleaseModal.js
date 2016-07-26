@@ -60,6 +60,12 @@ export default class ReleaseModal extends Component {
       Alert.alert('提示', '请输入微博');
     }
 
+    /*
+     *
+     *  注意了，下面请求时要加上content-Type，
+     *  不然提示“缺少必需参数status”，简直坑的一13
+     *
+     */
     AsyncStorage.getItem(Const.ACCESSTOKEN_KEY)
       .then((token) => {
         if (token) {
