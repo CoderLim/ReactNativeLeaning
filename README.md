@@ -2,7 +2,7 @@
 
 SinaWebBo:
 
-![image](https://github.com/CoderGLM/ReactNativeLeaning/blob/master/SinaWebBo/screenshots/sina_home.gif)  
+![image](https://github.com/CoderGLM/ReactNativeLeaning/blob/master/SinaWebBo/screenshots/sina_home.gif)
 ![image](https://github.com/CoderGLM/ReactNativeLeaning/blob/master/SinaWebBo/screenshots/sina_release_status.gif)
 <br/><br/>
 Movies：
