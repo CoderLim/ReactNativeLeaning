@@ -47,47 +47,72 @@ export default class HomePage extends Component {
     this.getStatuses();
   }
 
-  // 获取微博
-  getStatuses() {
-    {
-      /* 有点坑爹啊，计算max_id时数组的两个length都写成了legth
-        都没报错，默默的得到max_id＝0 */
-    }
-    AsyncStorage.getItem(Const.ACCESSTOKEN_KEY)
-      .then((token) => {
-        let  max_id = resultsCache.data.length > 0 ?
-                      resultsCache.data[resultsCache.data.length-1].id-1 :
-                      0;
-        let params = '?since_id=0' +
-                     '&max_id=' + max_id +
-                     '&count=' + 20 +
-                     '&access_token=' + token;
-        fetch('https://api.weibo.com/2/statuses/home_timeline.json'+params,
-          {
-              method: 'GET',
-          })
-          .then((response) => response.json())
-          .catch((error) => Alert.alert('error', error))
-          .then((responseData) => {
-            {/* 按下面写不对，因为concat不会改变当前数组 */}
-            {/* resultsCache.data.concat(responseData.statuses); */}
-            resultsCache.data = resultsCache.data.concat(responseData.statuses);
-            // 切记是这样写， 而不是像下面注释
-            this.setState({
-              dataSource: this.state.dataSource.cloneWithRows(resultsCache.data)
-            })
-            // ，而不是这样，我说怎么没数据呢
-            // this.state.dataSource.cloneWithRows(responseData.statuses);
-          })
-          .done(() => {
-            this.setState({
-              isLoading: false,
-              isLoadingTail: false,
-            });
-          });
-      })
-      .catch((error) => Alert.alert('error', error))
-      .done();
+  // 获取微博：此为ES6，ES7的写法在下面
+  // getStatuses() {
+  //   /* 有点坑爹啊，计算max_id时数组的两个length都写成了legth都没报错，默默的得到max_id＝0 */
+  //   AsyncStorage.getItem(Const.ACCESSTOKEN_KEY)
+  //     .then((token) => {
+  //       let  max_id = resultsCache.data.length > 0 ?
+  //                     resultsCache.data[resultsCache.data.length-1].id-1 :
+  //                     0;
+  //       let params = '?since_id=0' +
+  //                    '&max_id=' + max_id +
+  //                    '&count=' + 20 +
+  //                    '&access_token=' + token;
+  //       fetch('https://api.weibo.com/2/statuses/home_timeline.json'+params,
+  //         {
+  //             method: 'GET',
+  //         })
+  //         .then((response) => response.json())
+  //         .catch((error) => Alert.alert('error', error))
+  //         .then((responseData) => {
+  //           {/* 按下面写不对，因为concat不会改变当前数组 */}
+  //           {/* resultsCache.data.concat(responseData.statuses); */}
+  //           resultsCache.data = resultsCache.data.concat(responseData.statuses);
+  //           // 切记是这样写， 而不是像下面注释
+  //           this.setState({
+  //             dataSource: this.state.dataSource.cloneWithRows(resultsCache.data)
+  //           })
+  //           // ，而不是这样，我说怎么没数据呢
+  //           // this.state.dataSource.cloneWithRows(responseData.statuses);
+  //         })
+  //         .done(() => {
+  //           this.setState({
+  //             isLoading: false,
+  //             isLoadingTail: false,
+  //           });
+  //         });
+  //     })
+  //     .catch((error) => Alert.alert('error', error))
+  //     .done();
+  // }
+
+  // ES7的写法，参考：https://medium.com/front-end-hacking/es7-async-await-with-react-native-35ca167cc326#.28rug0mna
+  async getStatuses() {
+    /* 有点坑爹啊，计算max_id时数组的两个length都写成了legth都没报错，默默的得到max_id＝0 */
+    const token = await AsyncStorage.getItem(Const.ACCESSTOKEN_KEY);
+
+    let  max_id = resultsCache.data.length > 0 ?
+                  resultsCache.data[resultsCache.data.length-1].id-1 :
+                  0;
+    let params = '?since_id=0' +
+                 '&max_id=' + max_id +
+                 '&count=' + 20 +
+                 '&access_token=' + token;
+    const response = await fetch('https://api.weibo.com/2/statuses/home_timeline.json'+params,
+      {
+          method: 'GET',
+      });
+    const json = await response.json();
+    resultsCache.data = resultsCache.data.concat(json.statuses);
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(resultsCache.data)
+    })
+
+    this.setState({
+      isLoading: false,
+      isLoadingTail: false,
+    });
   }
 
   /*
@@ -107,7 +132,7 @@ export default class HomePage extends Component {
   _renderFooter() {
     if (this.state.isLoadingTail) {
       return <ActivityIndicator style={styles.scrollSpinner} />
-    }  
+    }
   }
 
   _renderSeparator(sectionID: number|string,
