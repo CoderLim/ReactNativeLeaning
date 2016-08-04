@@ -1,11 +1,13 @@
 /*
  *
  *
- *    监听键盘弹出参考：http://kpetrovi.ch/2015/09/30/react-native-ios-keyboard-events.html
+ *    1.监听键盘弹出参考：http://kpetrovi.ch/2015/09/30/react-native-ios-keyboard-events.html
  *
  *    但是会有警告：keyboardWillShow event should be registered via the keyboard module
  *
  *    所以更改如下，用Keyboard代替DeviceEventEmitter注册键盘监听
+ *
+ ＊   2.关于防止键盘阻挡输入框或其他控件，还可以尝试 KeyboardAvoidingView
  *
  */
 

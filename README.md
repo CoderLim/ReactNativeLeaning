@@ -2,7 +2,9 @@
 
 SinaWebBo:
 
-![image](https://github.com/CoderGLM/ReactNativeLeaning/blob/master/SinaWebBo/screenshots/11.gif)  <br/><br/>
+![image](https://github.com/CoderGLM/ReactNativeLeaning/blob/master/SinaWebBo/screenshots/sina_home.gif)
+![image](https://github.com/CoderGLM/ReactNativeLeaning/blob/master/SinaWebBo/screenshots/sina_release_status.gif)
+<br/><br/>
 Movies：
 
 ![image](https://github.com/CoderGLM/ReactNativeLeaning/blob/master/SinaWebBo/screenshots/12.gif)
@@ -49,10 +51,3 @@ Movies：
   * 如果你反复检查代码没问题，那就看看是不是在忘了bind，比如<MyView onclick={this._clickMyView}/>是错误的，应该写成
   * <MyView onclick={this._clickMyView.bind(this)}/>，希望以后支持ES7的这种绑定："::this._clickMyView"
 
-### 截图
-> 困了累了，睡觉前先扔上来几张图
-####1.授权页面
-![image](https://github.com/CoderGLM/ReactNativeLeaning/blob/master/SinaWebBo/screenshots/1.png)<br/>
-
-####2.首页
-![image](https://github.com/CoderGLM/ReactNativeLeaning/blob/master/SinaWebBo/screenshots/2.png)<br/>
