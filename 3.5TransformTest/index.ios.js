@@ -19,8 +19,9 @@ class TransformTest extends Component {
       <View style={styles.container}>
         <Image
           style={{
-            width: 200,
-            height: 200,
+            backgroundColor: 'red',
+            width: 440,
+            height: 300,
           }}
           resizeMode='contain'
           source={{uri: 'http://d.hiphotos.baidu.com/zhidao/pic/item/0df3d7ca7bcb0a4609b3f9c16a63f6246a60afb1.jpg'}}
@@ -29,7 +30,7 @@ class TransformTest extends Component {
         <Image
           style={{
             width: 200,
-            height: 200,
+            height: 300,
             transform: [
               {scale: 2}
             ],
