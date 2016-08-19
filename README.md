@@ -13,6 +13,8 @@
 
 ## 目录
 
+* 0.GUIDES
+  * 0.1NativeModuleIOS js使用原生模块
 * 1.AwesomeProject 第一个RN项目
 * 2.使用控件
   * 2.1 ActivityIndicatorIOSTest: 旋转的菊花
