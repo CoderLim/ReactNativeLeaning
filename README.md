@@ -1,5 +1,3 @@
-基础对于很多人来说学起来很乏味，先来看看后面demo的动图吧(如果没有图片或显示静态图或很卡请耐心等候)
-
 SinaWebBo:
 
 ![image](https://github.com/CoderGLM/ReactNativeLeaning/blob/master/SinaWebBo/screenshots/sina_home.gif)
@@ -20,7 +18,16 @@ Movies：
 >
 > 目前状态：在学习中爬坑，在坑中学习
 
+### 如何使用?
+
+1.下载或克隆代码；
+**比如想运行0.NativeModuleIOS**
+2.cd 到**0.NativeModuleIOS**目录；
+3.npm install
+4.react-native run-ios，如果报的错不知为何物，把*0.NativeModuleIOS*文件夹更名为*NativeModuleIOS*，重新运行。
+
 ### 项目列表
+
 * 1.AwesomeProject 第一个RN项目
 * 2.使用控件
   * 2.1 ActivityIndicatorIOSTest: 旋转的菊花
