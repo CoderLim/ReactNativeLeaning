@@ -20,10 +20,10 @@ Movies：
 
 ### 如何使用?
 
-1.下载或克隆代码；
-**比如想运行0.NativeModuleIOS**
-2.cd 到**0.NativeModuleIOS**目录；
-3.npm install
+1.下载或克隆代码；<br/>
+**比如想运行0.NativeModuleIOS**<br/>
+2.cd 到**0.NativeModuleIOS**目录；<br/>
+3.npm install<br/>
 4.react-native run-ios，如果报的错不知为何物，把*0.NativeModuleIOS*文件夹更名为*NativeModuleIOS*，重新运行。
 
 ### 项目列表
