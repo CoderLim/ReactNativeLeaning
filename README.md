@@ -12,7 +12,7 @@ Movies：
 # ReactNativeLeaning：ES6版本；
 ###其中Movies和SinaWebBo是实际项目，后者正在抽空进行中
 >
-> 从学习到实战，过程该如何把握，来看看[我的文章](http://www.jianshu.com/p/1f01174f43fa)吧：
+> 从学习到实战，过程该如何把握，来看看[我的文章](http://gengliming.com/2016/01/how-to-learn-react-native/)吧：
 >
 > 前面是基础知识，后面是两个实战项目，第一个是用Es6重写官方Movies，第二个是个人项目：新浪微博
 >

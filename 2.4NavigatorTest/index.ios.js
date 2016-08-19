@@ -38,13 +38,13 @@ var NavigationBarRouteMapper = {
         </Text>
       </TouchableHighlight>
     );
-  }
+  },
 
   Title(route, navigator, index, navState) {
     return (
       <Text style={styles.navText}>{route.name} [{index}]</Text>
     );
-  }
+  },
 
   RightButton(route, navigator, index, navState) {
     return (
