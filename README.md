@@ -1,32 +1,17 @@
-SinaWebBo:
-
-![image](https://github.com/CoderGLM/ReactNativeLeaning/blob/master/SinaWebBo/screenshots/sina_home.gif)
-![image](https://github.com/CoderGLM/ReactNativeLeaning/blob/master/SinaWebBo/screenshots/sina_release_status.gif)
-<br/><br/>
-Movies：
-
-![image](https://github.com/CoderGLM/ReactNativeLeaning/blob/master/SinaWebBo/screenshots/12.gif)
 
 # ReactNativeLeaning：ES6版本；
-###其中Movies和SinaWebBo是实际项目，后者正在抽空进行中
->
+
+## 前言
+
 > 从学习到实战，过程该如何把握，来看看[我的文章](http://gengliming.com/2016/01/how-to-learn-react-native/)吧：
 >
 > 前面是基础知识，后面是两个实战项目，第一个是用Es6重写官方Movies，第二个是个人项目：新浪微博
 >
 > 都是抽时间写的，进度有点慢，有错误欢迎指正
 >
-> 目前状态：在学习中爬坑，在坑中学习
+> 其中`Movies`和`SinaWebBo`是**实际项目**，后者正在抽空进行中
 
-### 如何使用?
-
-1.下载或克隆代码；<br/>
-**比如想运行0.NativeModuleIOS**<br/>
-2.cd 到**0.NativeModuleIOS**目录；<br/>
-3.npm install<br/>
-4.react-native run-ios，如果报的错不知为何物，把*0.NativeModuleIOS*文件夹更名为*NativeModuleIOS*，重新运行。
-
-### 项目列表
+## 项目列表
 
 * 1.AwesomeProject 第一个RN项目
 * 2.使用控件
@@ -45,7 +30,7 @@ Movies：
   * 4.1 FacebookMovies ：根据官方的Movies的ES5版本用ES6实现，简化版
   * 4.2 SinaWebBo: 微博，如果你看着项目名别扭，那就对了，手误，不过将错就错吧
  
-### 总结SinaWebBo遇到的坑
+## 总结SinaWebBo遇到的坑
 > 总感觉框架不成熟，有问题就开始想是不是框架的问题，其实年轻人你的很多bug还是要多从自身考虑，下面来总结几个废了点时间的“坑”
 
 * 1.invalid png
@@ -57,4 +42,23 @@ Movies：
 * 3.can not read property of 'xxx'
   * 如果你反复检查代码没问题，那就看看是不是在忘了bind，比如<MyView onclick={this._clickMyView}/>是错误的，应该写成
   * <MyView onclick={this._clickMyView.bind(this)}/>，希望以后支持ES7的这种绑定："::this._clickMyView"
+
+## HOW TO USE?
+
+1.下载或克隆代码；<br/>
+**比如想运行0.NativeModuleIOS**<br/>
+2.cd 到**0.NativeModuleIOS**目录；<br/>
+3.npm install<br/>
+4.react-native run-ios，如果报的错不知为何物，把*0.NativeModuleIOS*文件夹更名为*NativeModuleIOS*，重新运行。
+
+## DEMO
+
+SinaWebBo:
+
+![image](https://github.com/CoderGLM/ReactNativeLeaning/blob/master/SinaWebBo/screenshots/sina_home.gif)
+![image](https://github.com/CoderGLM/ReactNativeLeaning/blob/master/SinaWebBo/screenshots/sina_release_status.gif)
+<br/><br/>
+Movies：
+
+![image](https://github.com/CoderGLM/ReactNativeLeaning/blob/master/SinaWebBo/screenshots/12.gif)
 
