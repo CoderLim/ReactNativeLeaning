@@ -11,7 +11,7 @@
 >
 > 其中`Movies`和`SinaWebBo`是**实际项目**，后者正在抽空进行中
 
-## 项目列表
+## 目录
 
 * 1.AwesomeProject 第一个RN项目
 * 2.使用控件
