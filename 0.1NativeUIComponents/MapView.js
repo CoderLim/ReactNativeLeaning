@@ -13,6 +13,7 @@ import RCTMapView from './RCTMapView';
 export default class MapView extends Component {
   static propTypes = {
     pitchEnabled: PropTypes.bool,
+    onRegionChange: PropTypes.func,
     region: PropTypes.shape({
       latitude: PropTypes.number.isRequired,
       longitude: PropTypes.number.isRequired,
@@ -22,7 +23,19 @@ export default class MapView extends Component {
     }),
   };
 
+  constructor(props) {
+    super(props);// 这句不要丢了
+    this._onChange = this._onChange.bind(this);
+  }
+
+  _onChange(event: Event) {
+    if (!this.props.onRegionChange) {
+      return;
+    }
+    this.props.onRegionChange(event.nativeEvent.region);
+  }
+
   render() {
-    return <RCTMapView {...this.props} />;
+    return <RCTMapView {...this.props} onChange={this._onChange}/>;
   }
 }

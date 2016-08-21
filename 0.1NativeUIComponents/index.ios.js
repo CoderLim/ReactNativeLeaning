@@ -17,8 +17,9 @@ import MapView from './MapView';
 class NativeUIComponents extends Component {
   render() {
     var region = {
-      latitude: 39.26,
-      longitude: 115.25,
+      // 我的老家地址
+      latitude: 39.2088993882,
+      longitude: 115.6456824339,
       latitudeDelta: 0.1,
       longitudeDelta: 0.1
     };
@@ -28,9 +29,14 @@ class NativeUIComponents extends Component {
           style={styles.map}
           pitchEnabled={false}
           region={region}
+          onRegionChange={this._onRegionChange.bind(this)}
           />
       </View>
     );
+  }
+
+  _onRegionChange(region) {
+    console.log(region);
   }
 }
 
