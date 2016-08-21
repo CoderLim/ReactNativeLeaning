@@ -23,7 +23,7 @@
 @implementation CalendarManager
 
 // 这里还不能带参数，带参数报错
-RCT_EXPORT_MODULE();
+RCT_EXPORT_MODULE(CalendarManager);
 
 /**
  *

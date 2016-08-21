@@ -22,6 +22,7 @@ const WINDOW_HEIGHT = Dimensions.get('window').height;
 class ZoomImageTest extends Component {
   constructor(props) {
     super(props);
+    this._pinchDx = 0;
     this.state = {
       width: WINDOW_WIDTH,
       height: WINDOW_HEIGHT,
@@ -34,15 +35,22 @@ class ZoomImageTest extends Component {
       onMoveShouldSetPanResponder: (evt, gestureState) => true,
       onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
       onPanResponderGrant: (evt, gestureState) => {
-        console.log('grant');
-      },
-      onPanResponderMove: (evt, gestureState) => {
-        // 两个手指
         if (gestureState.numberActiveTouches == 2) {
           let touches = evt.nativeEvent.touches;
+          this._pinchDx = Math.abs(touches[0].locationX-touches[1].locationX);
+        }
+      },
+      onPanResponderMove: (evt, gestureState) => {
+        // pinch
+        if (gestureState.numberActiveTouches == 2) {
+          let touches = evt.nativeEvent.touches;
+          console.log(touches[0]);
           this.setState({
-            scale: 1+(touches[0].locationX-touches[1].locationX)/100,
+            scale: 0.5+Math.abs(touches[0].locationX-touches[1].locationX)/this._pinchDx,
           });
+        // drag
+        } else if (gestureState.numberActiveTouches == 1) {
+
         }
 
       },
@@ -55,10 +63,15 @@ class ZoomImageTest extends Component {
 
   render() {
     return (
-      <ScrollView style={styles.container} >
-        <View {...this.panResponder.panHandlers}>
+      <ScrollView style={styles.container}
+        directionalLockEnabled={false}
+        horizontal={false}
+        contentContainerStyle={{
+          width: this.state.width,
+          height: this.state.height,
+        }}>
           <Image
-            {...this.panResponder}
+            {...this.panResponder.panHandlers}
             onLoad={this._onLoad.bind(this)}
             source={{uri:'http://ww1.sinaimg.cn/mw690/006bjwLdgw1f6mhp5ciqlj30a68c81kx.jpg'}}
             style={{
@@ -69,8 +82,6 @@ class ZoomImageTest extends Component {
               }]
             }}
             />
-        </View>
-
       </ScrollView>
     );
   }
