@@ -15,6 +15,7 @@
 
 * 0.GUIDES
   * 0.1NativeModuleIOS js使用原生模块
+  * 0.2NativeUIComponents 定义原生MapView供js使用
 * 1.AwesomeProject 第一个RN项目
 * 2.使用控件
   * 2.1 ActivityIndicatorIOSTest: 旋转的菊花
