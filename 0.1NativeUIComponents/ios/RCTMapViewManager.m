@@ -23,7 +23,7 @@ RCT_EXPORT_MODULE();
 // 不知道管不管用
 RCT_EXPORT_VIEW_PROPERTY(pitchEnabled, BOOL);
 
-// 教程里的 RCTMapView 改成 MKMapView
+// 教程里的 RCTMapView 改成 MKMapView，问题已经反馈到github
 RCT_CUSTOM_VIEW_PROPERTY(region, MKCoordinateRegion, MKMapView) {
   [view setRegion: json ? [RCTConvert MKCoordinateRegion:json] : defaultView.region animated: YES];
 }
