@@ -18,6 +18,8 @@ import {
   StyleSheet,
   ScrollView,
   Animated,
+  View,
+  TouchableHighlight,
 } from 'react-native';
 import Svg,{
     Circle,
@@ -42,37 +44,53 @@ class SvgTest extends Component {
     super(props);
     this.state = {
       animator: new Animated.Value(0),
-      radius: 100,
+      radius: 1,
     };
-  }
 
-  componentWillMount() {
-    Animated.timing(this.state.animator, {
-      duration: 5000,
-      toValue: 1000,
-    }).start();
-
-    requestAnimationFrame(() => {
+    this.state.animator.addListener((p) => {
       this.setState({
-        radius: this.state.radius + 200,
+        radius: p.value,
       });
     });
   }
 
+  componentWillMount() {
+    // 这种方式很不好，卡顿严重
+    // requestAnimationFrame(this.update.bind(this));
+  }
+
+  // update() {
+  //   this.setState({
+  //     radius: this.state.radius + 1,
+  //   });
+  //
+  //   if (this.state.radius >= 40) {
+  //     return;
+  //   }
+  //
+  //   requestAnimationFrame(() => {
+  //     this.update();
+  //   });
+  // }
+  _pressBtn() {
+    Animated.spring(this.state.animator, {
+      friction: 1,
+      duration: 2000,
+      toValue: 40,
+    }).start();
+  }
+
   render() {
-    let AnimScrollView = Animated.createAnimatedComponent(ScrollView);
-    let AnimSvg = Animated.createAnimatedComponent(Svg);
-    let AnimCircle = Animated.createAnimatedComponent(Circle);
-    console.log(this.state.animator._value + "");
     return (
       <ScrollView style={styles.container}>
+        {/* 1.圆＋矩形 */}
         <Svg
           height="100"
           width="100">
             <Circle
               cx="50"
               cy="50"
-              r={40}
+              r="40"
               stroke="blue"
               strokeWidth="2.5"
               fill="green"/>
@@ -81,9 +99,10 @@ class SvgTest extends Component {
               y="0"
               width="100"
               height="100"
-              stroke="green"
+              stroke="red"
               fill="none"/>
           </Svg>
+          {/* 2.矩形 */}
           <Svg
             width="200"
             height="60">
@@ -96,6 +115,7 @@ class SvgTest extends Component {
               strokeWidth="3"
               stroke="rgb(0,0,0)"/>
           </Svg>
+          {/* 3.Circle */}
           <Svg
            width="100"
            height="100">
@@ -105,6 +125,7 @@ class SvgTest extends Component {
             r="50"
             fill="pink"/>
           </Svg>
+          {/* 4.Ellipse */}
           <Svg
             width="110"
             height="100">
@@ -117,6 +138,7 @@ class SvgTest extends Component {
               strokeWidth="2"
               fill="yellow"/>
           </Svg>
+          {/* 5.Polygon */}
           <Svg
             height="100"
             width="100">
@@ -126,6 +148,7 @@ class SvgTest extends Component {
               stroke="purple"
               strokeWidth="1"/>
           </Svg>
+          {/* 6.Path */}
           <Svg
             height="100"
             width="100">
@@ -134,6 +157,7 @@ class SvgTest extends Component {
               fill="none"
               stroke="red"/>
           </Svg>
+          {/* 7.Text */}
           <Svg
             height="60"
             width="200">
@@ -148,6 +172,7 @@ class SvgTest extends Component {
               耿笠茗
             </Text>
           </Svg>
+          {/* 8.G */}
           <Svg
             height="100"
             width="200">
@@ -177,6 +202,7 @@ class SvgTest extends Component {
               </Text>
             </G>
           </Svg>
+          {/* 9.Defs Use */}
           <Svg
             height="100"
             width="300">
@@ -190,6 +216,7 @@ class SvgTest extends Component {
             <Use href="#shape" x="20" y="0"/>
             <Use href="#shape" x="170" y="0" />
           </Svg>
+          {/* 10.Symbol */}
           <Svg
             height="150"
             width="110">
@@ -202,7 +229,7 @@ class SvgTest extends Component {
             <Use href="#symbol" x="0" y="110" width="75" height="38"/>
             <Use href="#symbol" x="0" y="140" width="50" height="25" />
           </Svg>
-
+          {/* 11.LinearGradient */}
           <Svg
             height="150"
             width="300">
@@ -214,6 +241,7 @@ class SvgTest extends Component {
             </Defs>
             <Ellipse cx="150" cy="75" rx="85" ry="55" fill="url(#grad)" />
           </Svg>
+          {/* 12.RadialGradient */}
           <Svg
             height="150"
             width="300">
@@ -225,6 +253,22 @@ class SvgTest extends Component {
             </Defs>
             <Ellipse cx="150" cy="75" rx="85" ry="55" fill="url(#grad)" />
           </Svg>
+          {/* 13.TouchableHighlight 嵌套Svg */}
+          <TouchableHighlight
+            activeOpacity={1}
+            onPress={this._pressBtn.bind(this)}>
+            <Svg
+              height="100"
+              width="100">
+                <Circle
+                  cx="50"
+                  cy="50"
+                  r={this.state.radius}
+                  stroke="blue"
+                  strokeWidth="2.5"
+                  fill="green"/>
+              </Svg>
+          </TouchableHighlight>
       </ScrollView>
     );
   }
