@@ -3,7 +3,7 @@
 
 ## 前言
 
-> 从学习到实战，过程该如何把握，详情请参考[我的博客](http://gengliming.com/2016/01/13/how-to-learn-react-native/)。
+> 从学习到实战，过程该如何把握，详情请参考[我的博客](https://coderlim.github.io/2016/01/13/how-to-learn-react-native/)。
 >
 > 前面是基础知识，后面是两个实战项目，第一个是用Es6重写官方Movies，第二个是个人项目：新浪微博
 >
